@@ -3,7 +3,7 @@ provider "aws" {
   version = "~> 2.0"
   region  = "us-east-1"
 }
-#################### RESEAU ####################
+######################################## RESEAU ########################################
 # Create a VPC
 resource "aws_vpc" "vpc_terraform" {
   cidr_block = "10.10.0.0/16"
@@ -20,6 +20,15 @@ resource "aws_subnet" "subnet_1_terraform" {
   
   tags = {
     Name = "subnet_1_terraform"
+    Env = "tp"
+   }
+  }
+  resource "aws_subnet" "subnet_2_terraform" {
+  cidr_block = "10.10.2.0/24"
+  vpc_id = aws_vpc.vpc_terraform.id
+  
+  tags = {
+    Name = "subnet_2_terraform"
     Env = "tp"
    }
   }
@@ -53,7 +62,7 @@ resource "aws_route_table_association" "routetableassociation" {
   subnet_id      = aws_subnet.subnet_1_terraform.id
   route_table_id = aws_route_table.routetable_terraform.id
 }
-#################### END RESEAU ####################
+######################################## END RESEAU ########################################
 
 #Create clé RSA 4096
 resource "tls_private_key" "key_terraform" {
@@ -65,7 +74,7 @@ resource "aws_key_pair" "ec2-key-tf" {
   public_key = tls_private_key.key_terraform.public_key_openssh
 }
 
-#################### INSTANCE ####################
+######################################## INSTANCE ########################################
 #Create EC2
 data "aws_ami" "ubuntu" {
   most_recent = true
@@ -111,9 +120,9 @@ resource "aws_instance" "ec2-test-2" {
 }
 
 
-#################### END INSTANCE ####################
+######################################## END INSTANCE ########################################
 
-#################### SECURITY GROUP ####################
+######################################## SECURITY GROUP ########################################
 resource "aws_security_group" "allow_http" {
   name        = "allow_http_from_any"
   description = "Allow http inbound traffic"
@@ -162,7 +171,7 @@ resource "aws_security_group" "allow_ssh_vpc" {
     Name = "allow_ssh_vpc"
   }
 }
-#################### END SECURITY GROUP ####################
+######################################## END SECURITY GROUP ########################################
 
 #OUTPUT
 output "private_key" {
