@@ -85,7 +85,7 @@ data "aws_ami" "ubuntu" {
 
 resource "aws_instance" "ec2-test-1" {
   ami           = data.aws_ami.ubuntu.id
-  instance_type = "t2.nano"
+  instance_type = var.instance_type
   subnet_id = aws_subnet.subnet_1_terraform.id
   key_name   = aws_key_pair.ec2-key-tf.id
   associate_public_ip_address = true
@@ -98,7 +98,7 @@ resource "aws_instance" "ec2-test-1" {
 }
 resource "aws_instance" "ec2-test-2" {
   ami           = data.aws_ami.ubuntu.id
-  instance_type = "t2.nano"
+  instance_type = var.instance_type
   subnet_id = aws_subnet.subnet_1_terraform.id
   key_name   = aws_key_pair.ec2-key-tf.id
   associate_public_ip_address = true
