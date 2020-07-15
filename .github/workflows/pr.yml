@@ -1,0 +1,16 @@
+name : 'Terraform Github Action'
+on :
+    - pull_request
+jobs :
+    terraform :
+        name: 'Terraform'
+        runs-on: ubuntu-latest
+        steps:
+            - name: 'Checkout'
+              uses: actions/checkout@master
+
+            - name: 'setup terraform'
+              uses: hashicorp/setup-terraform@v1
+            
+            - run: terraform init
+            - run: terraform plan
