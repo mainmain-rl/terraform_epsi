@@ -1,6 +1,8 @@
 name : 'Terraform Github Action'
 on :
-    - push_request
+    push:
+        branches: 
+            - master
 jobs :
     terraform :
         name: 'Terraform'
