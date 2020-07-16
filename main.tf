@@ -68,7 +68,7 @@ resource "aws_key_pair" "ec2-key-tf" {
 
 ######################################## INSTANCE ########################################
 #Create EC2
-/*data "aws_ami" "ubuntu" {
+data "aws_ami" "ubuntu" {
   most_recent = true
 
   filter {
@@ -84,7 +84,7 @@ resource "aws_key_pair" "ec2-key-tf" {
   owners = ["099720109477"] # Canonical
 }
 
-resource "aws_instance" "ec2-test-1" {
+/*resource "aws_instance" "ec2-test-1" {
   ami           = data.aws_ami.ubuntu.id
   instance_type = var.instance_type
   subnet_id = aws_subnet.subnet_1_terraform.id
@@ -113,35 +113,35 @@ resource "aws_instance" "ec2-test-2" {
 
 ##### LB #####
 #Create loadbalancer
-resource "aws_lb" "alb_terraform" {
-  name               = "alb_terraform"
+resource "aws_lb" "alb-terraform" {
+  name               = "alb-terraform"
   internal           = false
   load_balancer_type = "application"
   security_groups    = [aws_security_group.allow_http.id]
   subnets            = ["aws_subnet.subnet_1_terraform.id", "aws_subnet.subnet_2_terraform.id"]
 }
 #Create lb target group
-resource "aws_lb_target_group" "lb_target_group_tf" {
-  name     = "lb_target_group_tf"
+resource "aws_lb_target_group" "lb-target-group-tf" {
+  name     = "lb-target-group-tf"
   port     = 80
   protocol = "HTTP"
   vpc_id   = aws_vpc.vpc_terraform.id
 }
 #Create lb listner
 resource "aws_lb_listener" "alb_listner_terraform" {
-  load_balancer_arn = aws_lb.alb_terraform.arn
+  load_balancer_arn = aws_lb.alb-terraform.arn
   port              = "80"
   protocol          = "HTTP"
 
   default_action {
     type             = "forward"
-    target_group_arn = aws_lb_target_group.lb_target_group_tf.arn
+    target_group_arn = aws_lb_target_group.lb-target-group-tf.arn
   }
 }
 #creation lb target groupe attachment
 resource "aws_lb_target_group_attachment" "target_group_attachment_tf" {
-  target_group_arn = aws_lb_target_group.lb_target_group_tf.arn
-  target_id        = aws_instance.lb_target_group_tf.id
+  target_group_arn = aws_lb_target_group.lb-target-group-tf.arn
+  target_id        = aws_instance.lb-target-group-tf.id
   port             = 80
 }
 ##### END LB #####
@@ -179,7 +179,7 @@ resource "aws_autoscaling_group" "asg_terraform" {
 
 resource "aws_autoscaling_attachment" "asg_attachment_terraform" {
   autoscaling_group_name = aws_autoscaling_group.asg_terraform.id
-  alb_target_group_arn   = aws_alb_target_group.lb_target_group_tf.arn
+  alb-target_group_arn   = aws_alb-target_group.lb-target-group-tf.arn
 }
 #Create LAUNCH CONFIGURATION
 resource "aws_launch_configuration" "launch_configuration_terraform" {
