@@ -1,6 +1,6 @@
 terraform {
     backend "s3" {
-        bucket = "tsunamirr-rlajeunesse"
+        bucket = "epsi-rlajeunesse"
         key = "terraform_tfstate"
         region = "us-east-1"
     }
