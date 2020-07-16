@@ -32,12 +32,23 @@ resource "aws_subnet" "subnet_1_terraform" {
     Env = "tp"
    }
   }
-  resource "aws_subnet" "subnet_3_terraform" {
+
+resource "aws_subnet" "subnet_3_terraform" {
   cidr_block = "10.10.3.0/24"
   vpc_id = aws_vpc.vpc_terraform.id
   
   tags = {
     Name = "subnet_3_terraform"
+    Env = "tp"
+   }
+  }
+resource "aws_subnet" "subnet_4_terraform" {
+
+  cidr_block = "10.10.4.0/24"
+  vpc_id = aws_vpc.vpc_terraform.id
+  
+  tags = {
+    Name = "subnet_4_terraform"
     Env = "tp"
    }
   }
