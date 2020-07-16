@@ -23,15 +23,7 @@ resource "aws_subnet" "subnet_1_terraform" {
     Env = "tp"
    }
   }
-  resource "aws_subnet" "subnet_2_terraform" {
-  cidr_block = "10.10.2.0/24"
-  vpc_id = aws_vpc.vpc_terraform.id
-  
-  tags = {
-    Name = "subnet_2_terraform"
-    Env = "tp"
-   }
-  }
+
 
   # Create gateway
   resource "aws_internet_gateway" "internetgateway_terraform" {
