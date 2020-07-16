@@ -173,7 +173,7 @@ resource "aws_autoscaling_group" "asg_terraform" {
 
 resource "aws_autoscaling_attachment" "asg_attachment_terraform" {
   autoscaling_group_name = aws_autoscaling_group.asg_terraform.id
-  alb_target_group_arn   = aws_alb-target_group.lb-target-group-tf.arn
+  alb_target_group_arn   = aws_alb_target_group.lb-target-group-tf.arn
 }
 #Create LAUNCH CONFIGURATION
 resource "aws_launch_configuration" "launch_configuration_terraform" {
