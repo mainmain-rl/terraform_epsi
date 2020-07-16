@@ -1,7 +1,7 @@
-terraform {
-    backend "s3" {
-        bucket = "epsi-rlajeunesse"
-        key = "terraform_tfstate"
-        region = "us-east-1"
-    }
-}
+#terraform {
+#    backend "s3" {
+#        bucket = "epsi-rlajeunesse"
+#        key = "terraform_tfstate"
+#        region = "us-east-1"
+#    }
+#}
